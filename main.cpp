@@ -1,4 +1,4 @@
-#include <iostream>
+en#include <iostream>
 #include <cmath>
 
 // GLEW
@@ -34,7 +34,7 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 "color = ourColor;\n"
 "}\n\0";
 
-// The MAIN function, from here we start the application and run the game loop
+
 int main()
 {
 	// Init GLFW
@@ -52,7 +52,6 @@ int main()
 	// Set the required callback functions
 	glfwSetKeyCallback(window, key_callback);
 
-	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
 	// Initialize GLEW to setup the OpenGL Function pointers
 	glewInit();
@@ -103,7 +102,7 @@ int main()
 	glDeleteShader(fragmentShader);
 
 
-	// Set up vertex data (and buffer(s)) and attribute pointers
+	// Set up vertex data and attribute pointers
 	GLfloat vertices[] = {
 		-0.5f, -0.5f, 0.0f, // Left  
 		0.5f, -0.5f, 0.0f, // Right 
@@ -121,11 +120,11 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+	glBindVertexArray(0);
 
-						  // Game loop
+	// Game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
@@ -153,10 +152,10 @@ int main()
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	}
-	// Properly de-allocate all resources once they've outlived their purpose
+	// Properly de-allocate all resources
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	// Terminate GLFW, clearing any resources allocated by GLFW.
+	// Terminate GLFW
 	glfwTerminate();
 	return 0;
 }
